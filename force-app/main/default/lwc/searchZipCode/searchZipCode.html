@@ -1,0 +1,53 @@
+<!--
+  @description       : 
+  @author            : Edgar Santillana
+  @group             : 
+  @last modified on  : 07-30-2024
+  @last modified by  : Edgar Santillana
+  Modifications Log
+  Ver   Date         Author             Modification
+  1.0   07-30-2024   Edgar Santillana   Initial Version
+-->
+<template>
+  <lightning-card title="Zip Code Search" icon-name="custom:custom63">
+    <div class="slds-m-around_medium">
+      <lightning-input
+        label="Enter Zip Code"
+        value={zipCode}
+        onchange={handleInputChange}
+      ></lightning-input>
+
+      <lightning-button
+        label="Search"
+        onclick={searchZipCode}
+      ></lightning-button>
+
+      <template if:true={locationDetailsUS}>
+        <lightning-card title="US Locations" icon-name="custom:custom63">
+            <template for:each={locationDetailsUS} for:item="location">
+                <p key={placeKey}>
+                    <c-search-zip-code-list-view 
+                        location={location}> 
+                    </c-search-zip-code-list-view>
+                </p>
+            </template>
+        </lightning-card>
+    </template>
+    <template if:true={locationDetailsNONUS}>
+        <lightning-card title="NON US Locations" icon-name="custom:custom63">
+            <template for:each={locationDetailsNONUS} for:item="location">
+                <p key={placeKey}>
+                    <c-search-zip-code-list-view 
+                        location={location}> 
+                    </c-search-zip-code-list-view>
+                </p>
+            </template>
+        </lightning-card>
+    </template>
+
+      <template if:true={error}>
+        <p>{error}</p>
+      </template>
+    </div>
+  </lightning-card>
+</template>
