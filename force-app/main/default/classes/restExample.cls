@@ -1,41 +1,55 @@
 /**
- * @description       : 
+ * @description       : Apex callout class to get a random image of a dog.
  * @author            : Edgar Santillana
  * @group             : 
- * @last modified on  : 01-24-2025
+ * @last modified on  : 01-30-2025
  * @last modified by  : Edgar Santillana
  * Modifications Log
  * Ver   Date         Author             Modification
  * 1.0   01-24-2025   Edgar Santillana   Initial Version
 **/
-global with sharing class RestExample {
+@RestResource(urlMapping='/dogImage')
+global with sharing class restExample {
 
     private final static String ENDPOINT = 'https://dog.ceo/api/breeds/image/random';
+    private static final String MESSAGE_KEY = 'message';
 
-    public void debugImage(){
-        string imagedebug = doGat();
+    @AuraEnabled
+    public static String debugImage(){
+        string imagedebug = doGet();
         system.debug('Image is from ' + imagedebug);
+        return imagedebug;
     }
 
+    /**
+     * @description : Makes an HTTP GET request to fetch a random dog image.
+     * @return      : A string containing the URL of the random dog image or an error message.
+     */
     @HttpGet
     global static string doGet() {
-        RestRequest req = RestContext.request;
-        RestResponse res = RestContext.response;
-        String imageString = req.requestURI.substring(ENDPOINT);
 
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint(ENDPOINT);
+        req.setMethod('GET');
+        Http http = new Http();
+        HttpResponse res = http.send(req);
+        Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(res.getBody());
         
-        if(req.statis == 200){
-            System.debug(imageString);
-            return imageString;
-        } else if(req.status == 404){
-            throw new Exception(
-                'Image not found');
-        } else{
-            throw new Exception(
-                'Mesage'
-            );
-        }
+        String imageString = (String) responseMap.get(MESSAGE_KEY);
 
-        return imageString;
+        switch on res.getStatusCode() {
+            when 200 {
+                System.debug(imageString);
+                return imageString;
+            }
+            when 404 {
+                System.debug('Status code 404');
+                return null;
+            }
+            when else {
+                System.debug('Status code 500');
+                return null;
+            }
+        }
     }
 }

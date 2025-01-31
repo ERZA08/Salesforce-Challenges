@@ -1,0 +1,23 @@
+<!--
+  @description       : 
+  @author            : Edgar Santillana
+  @group             : 
+  @last modified on  : 01-30-2025
+  @last modified by  : Edgar Santillana
+  Modifications Log
+  Ver   Date         Author             Modification
+  1.0   01-30-2025   Edgar Santillana   Initial Version
+-->
+<template>
+    <lightning-card>
+        <lightning-button label="Get a random dog image" slot="actions" onclick={handleClick} disabled={isButtonDisabled}></lightning-button>
+        <div class="slds-m-around_medium">
+            <template if:true={dogImageUrl}>
+                <img src={dogImageUrl} alt="Random dog" />
+            </template>
+            <template if:false={dogImageUrl}>
+                <p>Error: {errorMessage}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
