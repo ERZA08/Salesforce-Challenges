@@ -1,0 +1,28 @@
+<!--
+  @description       : 
+  @author            : Edgar Santillana
+  @group             : 
+  @last modified on  : 02-14-2025
+  @last modified by  : Edgar Santillana
+  Modifications Log
+  Ver   Date         Author             Modification
+  1.0   02-11-2025   Edgar Santillana   Initial Version
+-->
+<template>
+
+    <lightning-card title="My Contacts" icon-name="standard:contact">
+        <div class="slds-p-around_medium">
+            <template if:true={contacts}>
+                <!-- Scrollable container -->
+                <div class="scroll-container">
+                    <template for:each={contacts} for:item="contact">
+                        <div key={contact.Id} class="card-wrapper" >
+                            <c-account-with-contacts-contact-item contact={contact}></c-account-with-contacts-contact-item>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

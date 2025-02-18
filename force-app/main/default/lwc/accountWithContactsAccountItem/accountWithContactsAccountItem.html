@@ -1,0 +1,41 @@
+<!--
+  @description       : 
+  @author            : Edgar Santillana
+  @group             : 
+  @last modified on  : 02-13-2025
+  @last modified by  : Edgar Santillana
+  Modifications Log
+  Ver   Date         Author             Modification
+  1.0   02-13-2025   Edgar Santillana   Initial Version
+-->
+<template>
+    <lightning-card title="Account" icon-name="standard:account">
+        <div class="slds-m-around_medium">
+            <template if:true={account}> 
+                <!--- Account Info -->
+                <lightning-layout>
+                    <lightning-layout-item size="12">
+                        <div class="slds-p-around_medium">
+                            <div>
+                                <label><strong> Name: </strong></label>
+                                <span>{account.Name}</span>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+                 <!--- Account Info -->
+
+                <!--- Contact List -->
+                <lightning-layout>
+                    <lightning-layout-item size="12">
+                    <c-account-with-contacts-contact-list contacts={contacts}></c-account-with-contacts-contact-list>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <!--- Contact List -->
+            </template>
+                 
+            
+        </div>
+
+    </lightning-card>
+</template>

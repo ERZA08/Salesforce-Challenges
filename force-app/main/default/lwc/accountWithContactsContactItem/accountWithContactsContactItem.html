@@ -1,0 +1,32 @@
+<!--
+  @description       : 
+  @author            : Edgar Santillana
+  @group             : 
+  @last modified on  : 02-11-2025
+  @last modified by  : Edgar Santillana
+  Modifications Log
+  Ver   Date         Author             Modification
+  1.0   02-11-2025   Edgar Santillana   Initial Version
+-->
+<template>
+    <lightning-card icon-name="standard:contact" title="Contact Information">
+            <div class="slds-p-around_medium">
+                <div>
+                    <label><strong>First Name: </strong></label>
+                    <span>{contact.FirstName}</span>
+                </div>
+                <div>
+                    <label><strong>Last Name: </strong></label>
+                    <span>{contact.LastName}</span>
+                </div>
+                <div>
+                    <label><strong>Email: </strong></label>
+                    <span>{contact.Email}</span>
+                </div>
+                <div>
+                    <label><strong>Phone: </strong></label>
+                    <span>{contact.Phone}</span>
+                </div>
+            </div>
+    </lightning-card>
+</template>

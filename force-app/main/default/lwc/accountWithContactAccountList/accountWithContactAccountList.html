@@ -1,0 +1,33 @@
+<!--
+  @description       : 
+  @author            : Edgar Santillana
+  @group             : 
+  @last modified on  : 02-14-2025
+  @last modified by  : Edgar Santillana
+  Modifications Log
+  Ver   Date         Author             Modification
+  1.0   02-14-2025   Edgar Santillana   Initial Version
+-->
+<template>
+    <lightning-card title="My Accounts" icon-name="standard:account">
+        <div class="slds-p-around_medium">
+            <template if:true={accounts}>
+                <!-- Scrollable container -->
+                <div class="scroll-container">
+                    <template for:each={accounts} for:item="acc">
+                        <div key={acc.Id} class="card-wrapper" data-id={acc.Id} onclick={handleCardClick}>
+                            <lightning-card title={acc.Name} icon-name="standard:account">
+                                <p class="slds-p-horizontal_small">
+                                    <strong>Industry:</strong> {acc.Industry} <br />
+                                    <strong>Phone:</strong> {acc.Phone}
+                                </p>
+                                <lightning-button label="View Details" data-id={acc.Id} onclick={handleCardClick}></lightning-button>
+                            </lightning-card>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

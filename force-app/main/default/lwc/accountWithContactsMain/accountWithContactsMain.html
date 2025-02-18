@@ -1,0 +1,31 @@
+<!--
+  @description       : 
+  @author            : Edgar Santillana
+  @group             : 
+  @last modified on  : 02-14-2025
+  @last modified by  : Edgar Santillana
+  Modifications Log
+  Ver   Date         Author             Modification
+  1.0   02-11-2025   Edgar Santillana   Initial Version
+-->
+<template>
+    <lightning-card title="My LWC Account with Contacts" icon-name="standard:account">
+        <div class="slds-m-around_medium" style="height: 500px;">
+            <lightning-layout>
+                <lightning-layout-item size="3">
+                   <c-account-with-contact-account-list
+                    onselectedevent={handleAccountSelected}>
+                   </c-account-with-contact-account-list>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="9">
+                    <template if:true={selectedAccountId}>
+                        <c-account-with-contacts-account-item
+                            account-id={selectedAccountId}>
+                        </c-account-with-contacts-account-item>
+                    </template>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </lightning-card>
+</template>
