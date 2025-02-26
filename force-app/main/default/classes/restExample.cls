@@ -2,7 +2,7 @@
  * @description       : Apex callout class to get a random image of a dog.
  * @author            : Edgar Santillana
  * @group             : 
- * @last modified on  : 01-30-2025
+ * @last modified on  : 02-18-2025
  * @last modified by  : Edgar Santillana
  * Modifications Log
  * Ver   Date         Author             Modification
@@ -12,6 +12,7 @@
 global with sharing class restExample {
 
     private final static String ENDPOINT = 'https://dog.ceo/api/breeds/image/random';
+    private final static String ENDPOINTPOSTMAN = 'https://postman-echo.com/get';
     private static final String MESSAGE_KEY = 'message';
 
     @AuraEnabled
@@ -52,4 +53,23 @@ global with sharing class restExample {
             }
         }
     }
+
+    public static void doGetPostman(){
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(ENDPOINTPOSTMAN);
+        request.setMethod('GET');
+        HttpResponse response = http.send(request);
+
+        if (response.getStatusCode() == 200) {
+            System.debug(response.getBody());
+        } else {
+            System.debug('Error: ' + response.getStatusCode());
+        }
+
+        System.debug('Current Time: ' + Limits.getCpuTime());
+        System.debug('Limit Time: ' + Limits.getLimitCpuTime());
+    }
 }
+
+
