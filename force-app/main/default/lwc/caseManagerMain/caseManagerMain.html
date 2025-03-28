@@ -1,0 +1,20 @@
+<!--
+  @description       : 
+  @author            : Edgar Santillana
+  @group             : 
+  @last modified on  : 03-20-2025
+  @last modified by  : Edgar Santillana
+  Modifications Log
+  Ver   Date         Author             Modification
+  1.0   03-20-2025   Edgar Santillana   Initial Version
+-->
+<template>
+    <lightning-card title="Case Manager" icon-name="standard:case">
+        <template if:true={wireOpenCases.data}>
+            <c-case-manager-list case-list={wireOpenCases.data}></c-case-manager-list>
+        </template>
+        <template if:true={wireClosedCases.data}>
+            <c-case-manager-list case-list={wireClosedCases.data}></c-case-manager-list>
+        </template>
+    </lightning-card>
+</template>

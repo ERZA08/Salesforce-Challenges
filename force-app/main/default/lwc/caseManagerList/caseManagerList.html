@@ -1,0 +1,63 @@
+<!--
+  @description       : 
+  @author            : Edgar Santillana
+  @group             : 
+  @last modified on  : 03-20-2025
+  @last modified by  : Edgar Santillana
+  Modifications Log
+  Ver   Date         Author             Modification
+  1.0   03-20-2025   Edgar Santillana   Initial Version
+-->
+<template>
+    <lightning-card title="Case Manager" icon-name="standard:case">
+        <div class="slds-m-around_medium">
+            <table class="slds-table slds-table_bordered slds-table_col-bordered slds-table_striped">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="slds-text-title_bold">Case Number</th>
+                        <th class="slds-text-title_bold">Subject</th>
+                        <th class="slds-text-title_bold">Status</th>
+                        <th class="slds-text-title_bold">Priority</th>
+                        <th class="slds-text-title_bold">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={cases} for:item="caseItem">
+                        <tr key={caseItem.Id} class="slds-hint-parent">
+                            <td>{caseItem.CaseNumber}</td>
+                            <td>{caseItem.Subject}</td>
+                            <td>
+                                <lightning-icon 
+                                    icon-name={caseItem.statusIcon}
+                                    alternative-text={caseItem.Status} 
+                                    size="small" 
+                                    class="slds-m-right_x-small">
+                                </lightning-icon>
+                                {caseItem.Status}
+                            </td>
+                            <td>
+                                <lightning-pill label={caseItem.Priority} class={caseItem.priorityClass}>
+                                </lightning-pill>
+                            </td>
+                            <td>
+                                <lightning-button 
+                                    label="Escalate" 
+                                    data-id={caseItem.Id} 
+                                    onclick={escalateCase} 
+                                    variant="brand"
+                                    class="slds-m-right_x-small">
+                                </lightning-button>
+                                <lightning-button 
+                                    label="Close Case" 
+                                    data-id={caseItem.Id} 
+                                    onclick={closeCase} 
+                                    variant="destructive">
+                                </lightning-button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </lightning-card>
+</template>
